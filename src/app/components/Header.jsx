@@ -1,13 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import Authentication from "./Authentication";
-import { useAuthContext } from "../provider/AuthProvider";
 import Link from "next/link";
+import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
-  const { authUser } = useAuthContext();
+  const { authUser } = useContext(AuthContext);
   return (
     <div className="p-5 w-full h-30 flex justify-between items-center shadow-xs">
       <div className="flex items-center ">
