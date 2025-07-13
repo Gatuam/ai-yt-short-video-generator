@@ -4,20 +4,30 @@ import { getVerificationEmailTemplate } from "../../emailtemplate/getVerificatio
 export const sendVerificationEmail = async (email, username, verifyCode) => {
   try {
     const { data, error } = await resend.emails.send({
-      from: "sggtm42@gmail",
+      from: "Acme <onboarding@resend.dev>",
       to: email,
       subject: "verification code",
       react: getVerificationEmailTemplate({ username, verifyCode }),
     });
+
     if (error) {
-      return res.status(400).json(error);
+      console.error("Email error:", error);
+      return {
+        success: false,
+        message: "Failed to send email",
+      };
     }
+
+    return {
+      success: true,
+      message: "Email sent successfully",
+      data,
+    };
   } catch (err) {
+    console.error("Email sending error:", err);
     return {
       success: false,
       message: "Verification server error",
     };
   }
-
-  res.status(200).json(data);
 };

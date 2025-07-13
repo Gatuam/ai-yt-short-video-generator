@@ -1,8 +1,8 @@
+import prisma from "@/global/prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import prisma from "@/global/prisma";
 
-export const authOption = {
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Email",
@@ -13,28 +13,52 @@ export const authOption = {
       async authorize(credentials, req) {
         try {
           const user = await prisma.user.findUnique({
-            where: {
-              email,
-            },
+            where: { email: credentials.email },
           });
+
           if (!user) {
             throw new Error("No user found");
           }
+
           if (!user.isVerified) {
-            throw new Error(" Please your email before login");
+            throw new Error("Please verify your email before logging in");
           }
-          if (user) {
-            return {
-              status: 200,
-              user,
-            };
-          } else {
-            return null;
+
+          const passwordCorrect = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
+
+          if (!passwordCorrect) {
+            throw new Error("Password incorrect");
           }
+
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+          };
         } catch (err) {
-          throw new Error(err);
+          throw new Error(err.message || "Authorization failed");
         }
       },
     }),
   ],
+  callback: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id?.toString();
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      return session;
+    },
+  },
+
+  secret: process.env.NEXTAUTH_SECRET,
+
+  session: {
+    strategy: "jwt",
+  },
 };

@@ -20,7 +20,7 @@ model User {
   email            String   @unique
   password         String
   credits          Int
-  verifycode       String
+  verifyCode       String
   verifyCodeExpiry DateTime
   isVerified       Boolean
   createdAt        DateTime @default(now())
