@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React, { useContext } from "react";
-import Authentication from "./Authentication";
 import Link from "next/link";
 import { AuthContext } from "../context/AuthContext";
 
@@ -21,16 +20,14 @@ const Header = () => {
         <h1 className="text-2xl font-bold text-white">Veo-Generator</h1>
       </div>
       {!authUser ? (
-        <Authentication>
-          <Button className={`px-8 py-[1px] cursor-pointer`}>Get Start</Button>
-        </Authentication>
+        <Button className={`px-8 py-[1px] cursor-pointer`}>Get Start</Button>
       ) : (
         <div className="flex justify-center items-center">
           <Link href={"/dashboard"}>
             <Button className="mr-5"> Dashboard</Button>
           </Link>
           <Image
-            src={authUser.photoURL || "/logo.svg"}
+            src={authUser.ptc || "/logo.svg"}
             alt="userimg"
             width={40}
             height={40}

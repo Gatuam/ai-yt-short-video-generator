@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
-import Authentication from "./Authentication";
 
 const Hero = () => {
   return (
@@ -17,9 +16,7 @@ const Hero = () => {
         <Button variant={"outline"} className="mr-4 px-7">
           View template
         </Button>
-        <Authentication>
-          <Button className=" px-7 ">Start Create Video</Button>
-        </Authentication>
+        <Button className=" px-7 ">Start Create Video</Button>
       </div>
     </div>
   );

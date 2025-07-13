@@ -1,9 +1,8 @@
-import {  Jost } from "next/font/google";
+import { Jost } from "next/font/google";
 import "./globals.css";
 
 import ThemeProvider from "./provider/ThemeProvider";
 import { AuthProvider } from "./context/AuthContext";
-import AuthUserProvider from "./provider/AuthProvider";
 
 const jost = Jost({ subsets: ["latin"] });
 
@@ -17,14 +16,8 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning={true}>
       <body className={jost.className}>
         <AuthProvider>
-        <AuthUserProvider>
-            <ThemeProvider>
-               {children}  
-            </ThemeProvider>      
-        </AuthUserProvider>
+          <ThemeProvider>{children}</ThemeProvider>
         </AuthProvider>
-          
-
       </body>
     </html>
   );

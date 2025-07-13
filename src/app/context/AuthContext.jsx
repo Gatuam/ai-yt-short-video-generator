@@ -1,5 +1,5 @@
-'use client'
-import { createContext, useState } from 'react';
+"use client";
+import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
@@ -12,9 +12,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-
-
-
-
-
