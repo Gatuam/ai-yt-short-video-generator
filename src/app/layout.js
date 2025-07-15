@@ -3,6 +3,7 @@ import "./globals.css";
 
 import ThemeProvider from "./provider/ThemeProvider";
 import { AuthProvider } from "./context/AuthContext";
+import SessionAuthProvider from "./provider/SessionProvider";
 
 const jost = Jost({ subsets: ["latin"] });
 
@@ -15,9 +16,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={jost.className}>
+        <SessionAuthProvider>
         <AuthProvider>
           <ThemeProvider>{children}</ThemeProvider>
         </AuthProvider>
+        </SessionAuthProvider>
       </body>
     </html>
   );

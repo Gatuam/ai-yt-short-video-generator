@@ -1,12 +1,5 @@
-import React from "react";
-import Authentication from "../components/Authentication";
-
 const page = () => {
-  return (
-    <div>
-      <Authentication></Authentication>
-    </div>
-  );
+  return <div>hi</div>;
 };
 
 export default page;

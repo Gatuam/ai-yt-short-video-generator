@@ -48,17 +48,28 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id?.toString();
+        token.isVerified = user?.isVerified;
+        token.credits = user?.credits;
+        token.username = user?.username
       }
       return token;
     },
     async session({ session, token }) {
+      if (token) {
+        session.user.id = token?.id;
+        session.user.isVerified = token?.isVerified;
+        session.user.credits = token?.credits;
+        session.user.username = token?.username
+      }
       return session;
     },
   },
 
-  secret: process.env.NEXTAUTH_SECRET,
-
   session: {
     strategy: "jwt",
   },
+  pages: {
+    signUn: "/sign-un",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 };

@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React, { useContext } from "react";
 import Link from "next/link";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../../app/context/AuthContext";
+import { signIn } from "next-auth/react";
 
 const Header = () => {
   const { authUser } = useContext(AuthContext);
@@ -19,20 +20,27 @@ const Header = () => {
         />
         <h1 className="text-2xl font-bold text-white">Veo-Generator</h1>
       </div>
-      {!authUser ? (
-        <Button className={`px-8 py-[1px] cursor-pointer`}>Get Start</Button>
+      {authUser ? (
+        <div className="flex gap-3">
+          <Button
+            // onClick={()=>  signIn()}
+            className={`px-8 py-[1px] cursor-pointer`}
+          >
+            Signin
+          </Button>
+        </div>
       ) : (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center cursor-pointer">
           <Link href={"/dashboard"}>
             <Button className="mr-5"> Dashboard</Button>
           </Link>
-          <Image
+          {/* <Image
             src={authUser.ptc || "/logo.svg"}
             alt="userimg"
             width={40}
             height={40}
             className="rounded-full"
-          ></Image>
+          ></Image> */}
         </div>
       )}
     </div>

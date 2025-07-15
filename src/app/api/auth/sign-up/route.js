@@ -1,11 +1,12 @@
 import bcrypt from "bcrypt";
 import prisma from "@/global/prisma";
-import { sendVerificationEmail } from "@/mail/sendVerification";
+import { sendMail } from "@/mail/sendVerification";
 
 export async function POST(req) {
   try {
     const { username, email, password } = await req.json();
 
+    // Check username availability
     const userByUsername = await prisma.user.findFirst({ where: { username } });
     if (userByUsername) {
       return Response.json(
@@ -14,11 +15,11 @@ export async function POST(req) {
       );
     }
 
+    // Check email existence
     const existingUser = await prisma.user.findFirst({ where: { email } });
 
     const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 12);
-
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 12); // 12 hours
     const hashedPassword = await bcrypt.hash(password, 10);
 
     if (existingUser && !existingUser.isVerified) {
@@ -30,13 +31,27 @@ export async function POST(req) {
           verifyCodeExpiry: expiresAt,
         },
       });
+
+      const emailSent = await sendMail(
+        existingUser.email,
+        "Verify your account",
+        `<p>Hello ${existingUser.username}, your verification code is <strong>${verifyCode}</strong>.</p>`
+      );
+
+      if (!emailSent) {
+        return Response.json(
+          { success: false, message: "Failed to send verification email" },
+          { status: 500 }
+        );
+      }
     } else if (existingUser && existingUser.isVerified) {
       return Response.json(
         { success: false, message: "Email already registered" },
         { status: 409 }
       );
     } else {
-      await prisma.user.create({
+      // Create a new user
+      const NewUser = await prisma.user.create({
         data: {
           username,
           email,
@@ -47,15 +62,19 @@ export async function POST(req) {
           isVerified: false,
         },
       });
-    }
 
-    const emailRes = await sendVerificationEmail(email, username, verifyCode);
-
-    if (!emailRes.success) {
-      return Response.json(
-        { success: false, message: "Failed to send verification email" },
-        { status: 500 }
+      const emailSent = await sendMail(
+        NewUser.email,
+        "Verify your account",
+        `<p>Hello ${NewUser.username}, your verification code is <strong>${verifyCode}</strong>.</p>`
       );
+
+      if (!emailSent) {
+        return Response.json(
+          { success: false, message: "Failed to send verification email" },
+          { status: 500 }
+        );
+      }
     }
 
     return Response.json(
@@ -68,7 +87,11 @@ export async function POST(req) {
   } catch (err) {
     console.error(err);
     return Response.json(
-      { success: false, message: "Server error during registration" },
+      {
+        success: false,
+        message: "Server error during registration",
+        error: err,
+      },
       { status: 500 }
     );
   }

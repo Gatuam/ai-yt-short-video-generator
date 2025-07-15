@@ -1,33 +1,28 @@
-import { resend } from "@/lib/resend";
-import { getVerificationEmailTemplate } from "../../emailtemplate/getVerificationEmailTemplate";
+// sendVerification.js
+import nodemailer from 'nodemailer';
 
-export const sendVerificationEmail = async (email, username, verifyCode) => {
+const transporter = nodemailer.createTransport({
+  secure: true,
+  host: 'smtp.gmail.com',
+  port: 465,
+  auth: {
+    user: process.env.APP_USER,
+    pass: process.env.APP_PASS,
+  },
+});
+
+export async function sendMail(to, subject, html) {
   try {
-    const { data, error } = await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: email,
-      subject: "verification code",
-      react: getVerificationEmailTemplate({ username, verifyCode }),
+    const info = await transporter.sendMail({
+      from: process.env.APP_USER,
+      to,
+      subject,
+      html,
     });
-
-    if (error) {
-      console.error("Email error:", error);
-      return {
-        success: false,
-        message: "Failed to send email",
-      };
-    }
-
-    return {
-      success: true,
-      message: "Email sent successfully",
-      data,
-    };
+    console.log('Email sent:', info.messageId);
+    return true; // ✅ FIX: explicitly return true if successful
   } catch (err) {
-    console.error("Email sending error:", err);
-    return {
-      success: false,
-      message: "Verification server error",
-    };
+    console.error('Failed to send mail:', err);
+    return false; // ✅ FIX: return false on failure
   }
-};
+}
