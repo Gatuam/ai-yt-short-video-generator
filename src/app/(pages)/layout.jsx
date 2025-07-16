@@ -1,6 +1,6 @@
 import Provider from "./Provider";
-import AppHeader from "@/components/global/headerComponents/AppHeader";
-import MainSidebar from "@/components/global/SidebarComponents/MainSidebar";
+import AppHeader from "@/components/global/AppComponent/headerComponents/AppHeader";
+import MainSidebar from "@/components/global/AppComponent/SidebarComponents/MainSidebar";
 
 const layout = ({ children }) => {
   return (

@@ -3,15 +3,11 @@ import React from "react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Tv2Icon, TvMinimalPlay } from "lucide-react";
+import { TvMinimalPlay } from "lucide-react";
 import NavMain from "./_children/NavMain";
 import { useRouter } from "next/navigation";
 import FooterSidebar from "./_children/FooterSidebar";
