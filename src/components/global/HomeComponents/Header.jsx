@@ -3,9 +3,18 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React, { useContext } from "react";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { AuthContext } from "@/app/context/AuthContext";
-import {  TvMinimalPlay } from "lucide-react";
+import { TvMinimalPlay } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const { authUser } = useContext(AuthContext);
@@ -30,15 +39,22 @@ const Header = () => {
           <Link href={"/dashboard"}>
             <Button className="mr-5"> Dashboard</Button>
           </Link>
-          {
-            <Image
-              src={authUser.image || "/logo.svg"}
-              alt="userimg"
-              width={40}
-              height={40}
-              className="rounded-full"
-            ></Image>
-          }
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar>
+                <AvatarImage src={authUser.image || "/logo.svg"} />
+                <AvatarFallback>User</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>My Account</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+              onClick={()=> signOut()}
+              >Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       )}
     </div>

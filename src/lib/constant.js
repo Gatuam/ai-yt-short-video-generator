@@ -22,3 +22,16 @@ export const navMain= [
       icon: CreditCard,
     },
   ]
+
+  export const suggestions = [
+  "AI Tools",
+  "Tech Reviews",
+  "Travel Hacks",
+  "Mindset Shift",
+  "Crypto News",
+  "Fitness Tips",
+  "Startup Ideas",
+  "Book Summary",
+  "Career Growth",
+  "Design Trends"
+];

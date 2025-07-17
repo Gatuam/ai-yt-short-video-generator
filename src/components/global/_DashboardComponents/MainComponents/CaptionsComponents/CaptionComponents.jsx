@@ -1,7 +1,9 @@
 import React from "react";
 
 const CaptionComponents = () => {
-  return <div>CaptionComponents</div>;
+  return <div>
+    
+  </div>;
 };
 
 export default CaptionComponents;

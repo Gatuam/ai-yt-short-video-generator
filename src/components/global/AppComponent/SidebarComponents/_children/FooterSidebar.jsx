@@ -1,11 +1,14 @@
 "use client";
 import { AuthContext } from "@/app/context/AuthContext";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import {
   SidebarFooter,
   SidebarGroup,
   SidebarMenu,
 } from "@/components/ui/sidebar";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 
 import React, { useContext } from "react";
@@ -25,13 +28,21 @@ const FooterSidebar = () => {
           </Button>
         </div>
         <div className="bg-[#1d1d1d91] border border-[#f3f3f315] rounded-sm flex justify-center items-center p-2 gap-3 w-full group-data-[collapsible=icon]:hidden ">
-          <Image
-            src={authUser?.image || "/logo.svg"}
-            alt="userimg"
-            width={25}
-            height={25}
-            className="rounded-full "
-          ></Image>
+         <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar>
+                <AvatarImage src={authUser?.image || "/logo.svg"} />
+                <AvatarFallback>User</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>My Account</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+              onClick={()=> signOut()}
+              >Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <div className="">
             <p className="text-sm font-normal text-neutral-300">
               {authUser?.name}
