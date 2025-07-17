@@ -35,3 +35,13 @@ export const navMain= [
   "Career Growth",
   "Design Trends"
 ];
+
+export const genStyle = [
+  { name: 'Cinematic', image: '/2.jpg' },
+  { name: 'Anime', image: '/4.jpg' },
+  { name: 'Sketch', image: '/17.jpg' },
+  { name: 'Watercolor', image: '/11.jpg' },
+  { name: 'Cyberpunk', image: '/14.jpg' },
+  { name: 'Fantasy', image: '/16.jpg' },
+  { name: 'Pixel Art', image: '/15.jpg' },
+];

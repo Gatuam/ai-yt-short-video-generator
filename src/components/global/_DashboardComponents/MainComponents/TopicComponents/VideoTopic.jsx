@@ -36,7 +36,10 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
         <h1 className="text-3xl font-semibold ">Create New Video</h1>
         <p className="text-sm text-neutral-400 mb-3">Project title</p>
         <Input
-          onChange={(e) => onHandleTitle("title", e.target.value)}
+          onChange={(e) => {
+            onHandleTitle("title", e.target.value)
+            onHandleInput('title', e.target.value )
+          }}
           className="focus-visible:ring-0 focus-visible:outline-none w-[100%]"
           placeholder="type video idea"
         />
@@ -47,7 +50,7 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
         <p className="text-sm tracking-wider text-neutral-300  mb-2">
           Selected topic for your video
         </p>
-        <div className="border border-[#ff7b0011] bg-gradient-to-b from-[#ff7b0004] to-[#180b0000] rounded-lg p-3 w-full">
+        <div className="border border-[#fa9a4111] bg-gradient-to-b from-[#ff7b0004] to-[#180b0000] rounded-lg p-3 w-full">
           <Tabs defaultValue="Suggestion">
             <TabsList className="bg-gradient-to-b from-[#ff7b0009] to-[#180b0005] border ">
               <TabsTrigger
@@ -85,7 +88,7 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
               <div>
                 <Textarea
                   onChange={(e) => onHandleInput("topic", e.target.value)}
-                  className="focus-visible:ring-0 focus-visible:outline-none w-[100%] border border-[#ffbb0009] bg-gradient-to-b from-[#8b4f000c] to-[#111] "
+                  className="focus-visible:ring-0 focus-visible:outline-none w-[100%] border border-[#ffcd4411] bg-gradient-to-b from-[#8b4f000c] to-[#111] h-35 resize-none p-3 "
                   placeholder="type your video topic"
                 />
               </div>
@@ -113,7 +116,7 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
           )}
         </div>
       </div>
-      {!scripts && (
+      {scripts && (
         <div className="px-2">
           <Button
             disabled={loading}
