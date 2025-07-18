@@ -50,9 +50,9 @@ const Header = () => {
             <DropdownMenuContent>
               <DropdownMenuItem>My Account</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem
-              onClick={()=> signOut()}
-              >Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => signOut()}>
+                Logout
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

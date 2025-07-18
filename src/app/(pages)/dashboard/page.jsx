@@ -3,7 +3,7 @@ import MainComponents from "@/components/global/_DashboardComponents/MainCompone
 const page = () => {
   
   return (
-    <div>
+    <div className="w-full bg-[#0a0a0a]">
       <MainComponents />
     </div>
   );

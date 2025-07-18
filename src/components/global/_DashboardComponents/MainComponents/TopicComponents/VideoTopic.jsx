@@ -37,8 +37,8 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
         <p className="text-sm text-neutral-400 mb-3">Project title</p>
         <Input
           onChange={(e) => {
-            onHandleTitle("title", e.target.value)
-            onHandleInput('title', e.target.value )
+            onHandleTitle("title", e.target.value);
+            onHandleInput("title", e.target.value);
           }}
           className="focus-visible:ring-0 focus-visible:outline-none w-[100%]"
           placeholder="type video idea"
@@ -104,7 +104,7 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
                   return (
                     <h2
                       onClick={() => setSelecetedScript(i)}
-                      className={` line-clamp-4 tracking-wide leading-8 text-sm text-neutral-600 border p-2 overflow-hidden rounded-lg border-[#fc710013] ${selectedScript === i && " bg-gradient-to-b from-[#fc71000e] to-[#22222207] "}`}
+                      className={` line-clamp-4 tracking-wide leading-8 text-sm text-neutral-400 border p-2 overflow-hidden rounded-lg border-[#fc710013] ${selectedScript === i && " bg-gradient-to-b from-[#fc710025] to-[#22222207] text-neutral-50 "}`}
                       key={i}
                     >
                       {script.content}
@@ -116,7 +116,7 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
           )}
         </div>
       </div>
-      {scripts && (
+      {scripts.length === 0 && (
         <div className="px-2">
           <Button
             disabled={loading}
@@ -129,7 +129,7 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
             ) : (
               <SparkleIcon />
             )}
-            Generate Video
+            Generate Scripts
           </Button>
         </div>
       )}

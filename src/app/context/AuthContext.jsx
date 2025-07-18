@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
         name: session.user.name,
         email: session.user.email,
         image: session.user.image,
+        credits: session.user.credits,
       });
     } else if (status === "unauthenticated") {
       setAuthUser(null);

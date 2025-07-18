@@ -16,12 +16,14 @@ export const authOptions = {
         });
         token.id = dbUser?.id;
         token.email = dbUser?.email;
+        token.credits = dbUser?.credits
       }
       return token;
     },
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.email = token.email;
+      session.user.credits = token.credits
       return session;
     },
   },

@@ -26,10 +26,21 @@ Give the response in JSON format and follow this schema:
       throw new Error("AI returned empty response");
     }
 
-    // ✅ Strip markdown ```json blocks if present
     text = text.trim().replace(/^```json\s*|```$/g, "");
 
-    return NextResponse.json(JSON.parse(text));
+
+    const json = JSON.parse(text);
+
+
+    const cleaned = json.scripts.map((script) => ({
+      content: script.content
+        .replace(/\(.*?\)/g, '')
+        .replace(/#\w+/g, '')
+        .replace(/\\n|[\r\n]+/g, ' ')
+        .trim()
+    }));
+
+    return NextResponse.json({ scripts: cleaned });
   } catch (err) {
     console.error("API error:", err);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

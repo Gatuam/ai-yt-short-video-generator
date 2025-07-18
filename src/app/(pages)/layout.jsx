@@ -4,13 +4,16 @@ import MainSidebar from "@/components/global/AppComponent/SidebarComponents/Main
 
 const layout = ({ children }) => {
   return (
-    <Provider>
+    <div className="bg-neutral-950">
+      <Provider>
       <MainSidebar></MainSidebar>
       <div className="px-5 w-full">
         <AppHeader></AppHeader>
         {children}
       </div>
     </Provider>
+    </div>
+    
   );
 };
 

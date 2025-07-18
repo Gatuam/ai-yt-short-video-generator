@@ -1,11 +1,12 @@
-import { Jost } from "next/font/google";
+
+import { Outfit } from 'next/font/google';
 import "./globals.css";
 
 import ThemeProvider from "./provider/ThemeProvider";
 import { AuthProvider } from "./context/AuthContext";
 import SessionAuthProvider from "./provider/SessionProvider";
 
-const jost = Jost({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -15,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={jost.className}>
+      <body className={`${outfit.className} bg-neutral-950`}>
         <SessionAuthProvider>
         <AuthProvider>
           <ThemeProvider>{children}</ThemeProvider>

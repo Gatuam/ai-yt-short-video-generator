@@ -15,7 +15,7 @@ import FooterSidebar from "./_children/FooterSidebar";
 const MainSidebar = () => {
   const router = useRouter();
   return (
-    <Sidebar collapsible="icon" className="max-w-[230px] ">
+    <Sidebar collapsible="icon" className="max-w-[230px] bg-neutral-950 ">
       <SidebarContent>
         <SidebarHeader>
           <SidebarMenu>
