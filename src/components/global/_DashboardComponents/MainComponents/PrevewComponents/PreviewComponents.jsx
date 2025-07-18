@@ -10,7 +10,7 @@ const PreviewComponents = ({ formdata }) => {
   const videoTopic = formdata?.topic;
   const videoVoice = formdata?.selectedVioce;
   return (
-    <div className="p-4 border rounded-lg bg-gradient-to-b from-[#ffffff0e] flex flex-col gap-3">
+    <div className="p-4 border rounded-lg bg-gradient-to-b from-[#ff89010e] flex flex-col gap-3">
       <div className="relative">
         <Image
           className=" rounded-lg "

@@ -59,3 +59,21 @@ export const voices = [
   { id: "OYWwCdDHouzDwiZJWOOu", name: "Mason", flag: "🇺🇸", avatar: "https://randomuser.me/api/portraits/men/5.jpg" },
   { id: "Bj9UqZbhQsanLzgalpEG", name: "Lucas", flag: "🇬🇧🇺🇸", avatar: "https://randomuser.me/api/portraits/men/99.jpg" },
 ];
+
+export const genStyles = [
+  { name: 'Cinematic', image: '/2.jpg' },
+  { name: 'Anime', image: '/4.jpg' },
+  { name: 'Sketch', image: '/17.jpg' },
+  { name: 'Watercolor', image: '/11.jpg' },
+  { name: 'Cyberpunk', image: '/14.jpg' },
+  { name: 'Fantasy', image: '/5.jpg' },
+  { name: 'Pixel Art', image: '/6.jpg' },
+   { name: 'Pixel Art', image: '/7.jpg' },
+    { name: 'Pixel Art', image: '/8.jpg' },
+     { name: 'Pixel Art', image: '/9.jpg' },
+      { name: 'Pixel Art', image: '/18.jpg' },
+       { name: 'Pixel Art', image: '/2.jpg' },
+        { name: 'Pixel Art', image: '/4.jpg' },
+         { name: 'Pixel Art', image: '/5.jpg' },
+];
+

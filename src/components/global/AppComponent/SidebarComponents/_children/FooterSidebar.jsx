@@ -10,12 +10,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarFooter, SidebarGroup } from "@/components/ui/sidebar";
-import { DiamondPlus } from "lucide-react";
+import { LucideDiamond } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 import React, { useContext } from "react";
 
 const FooterSidebar = () => {
+  const router = useRouter();
   const { authUser } = useContext(AuthContext);
   return (
     <SidebarGroup>
@@ -25,7 +27,7 @@ const FooterSidebar = () => {
             Create Video with <br /> Veo-AI
           </p>
           <p className="text-orange-400 text-sm mb-1 flex gap-2 ">
-            <DiamondPlus /> 5 credits left
+            <LucideDiamond /> {authUser?.credits} credit remain
           </p>
           <Button className=" cursor-pointer" size={"sm"} variant={"outline"}>
             Buy Credit
@@ -42,7 +44,13 @@ const FooterSidebar = () => {
             <DropdownMenuContent>
               <DropdownMenuItem>My Account</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => signOut()}>
+              <DropdownMenuItem
+                onClick={() =>
+                  signOut().then(() => {
+                    router.push("/");
+                  })
+                }
+              >
                 Logout
               </DropdownMenuItem>
             </DropdownMenuContent>
