@@ -3,23 +3,32 @@ import { PlayCircle } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
-const PreviewComponents = ({ formdata }) => {
+const PreviewComponents = ({ formdata, audioUrl, audioRef }) => {
   const videoStyle =
     formdata && genStyle.find((style) => style?.name === formdata?.videoStyle);
   const videoTitle = formdata?.title;
   const videoTopic = formdata?.topic;
   const videoVoice = formdata?.selectedVioce;
   return (
-    <div className="p-4 border rounded-lg bg-gradient-to-b from-[#ff89010e] flex flex-col gap-3">
+    <div className="p-4 flex flex-col gap-3">
       <div className="relative">
         <Image
-          className=" rounded-lg "
+          className=" rounded-lg mb-3"
           width={600}
           height={700}
           alt="preview"
           src={videoStyle?.image || "/7.jpg"}
         ></Image>
         <PlayCircle className=" absolute right-3 bottom-4" />
+        <div></div>
+        {audioUrl && (
+          <audio
+            ref={audioRef}
+            src={audioUrl}
+            controls
+            className="w-[80%] mb-1 "
+          />
+        )}
       </div>
 
       <div>

@@ -19,7 +19,7 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
     setLoading(true);
     setSelecetedScript(null);
     try {
-      const response = await axios.post("/api/gen-veo", { topic: selected });
+      const response = await axios.post("/api/gen-scripts", { topic: selected });
       console.log(response?.data);
       setScripts(response?.data?.scripts || []);
       console.log(selected);
@@ -103,7 +103,9 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
                 {scripts.map((script, i) => {
                   return (
                     <h2
-                      onClick={() => setSelecetedScript(i)}
+                      onClick={() => {
+                        onHandleInput("script", script.content);
+                        setSelecetedScript(i)}}
                       className={` line-clamp-4 tracking-wide leading-8 text-sm text-neutral-400 border p-2 overflow-hidden rounded-lg border-[#fc710013] ${selectedScript === i && " bg-gradient-to-b from-[#fc710025] to-[#22222207] text-neutral-50 "}`}
                       key={i}
                     >
@@ -120,7 +122,10 @@ const VideoTopic = ({ onHandleInput, onHandleTitle }) => {
         <div className="px-2">
           <Button
             disabled={loading}
-            onClick={() => generateSceipt()}
+            onClick={() =>{ 
+              generateSceipt()
+              
+            }}
             variant={"outline"}
             className="border bg-gradient-to-b from-[#ff990067] to-[#111] cursor-pointer"
           >
